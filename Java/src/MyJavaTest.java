@@ -38,4 +38,7 @@ public class MyJavaTest {
 		
 		System.out.println("Static blocak will execute before main method1");
 	}
+	
+	int[] a={2,3,4};
+	
 }

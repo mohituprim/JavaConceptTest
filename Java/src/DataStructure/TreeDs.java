@@ -1,7 +1,12 @@
 package DataStructure;
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.lang.*;
 
 public class TreeDs {
 
@@ -36,7 +41,40 @@ public class TreeDs {
 		public void UseBinaryTree() {
 			BinaryTree bt =  new  BinaryTree(10);
 		}
+
+		int HeightOfBinaryTree(TreeNode root)
+		{
+			if(root==null)
+				return 0;
+			else
+				return 1+Math.max(HeightOfBinaryTree(root.Left), HeightOfBinaryTree(root.Right));
+		}
 		
+		//Time Complexity = o(n2)
+		void LevelOrderTraversalWithoutQueue(TreeNode root)
+		{
+			
+			for(int h=1;h<=HeightOfBinaryTree(root);h++)
+			{
+				
+			}
+		}
+		
+		void printNodeAtLevel(TreeNode root, int level)
+		{
+			if(root==null)
+				return;
+			if(level==1)
+				System.out.println(root.key);
+			else if(level>1)
+			{
+				printNodeAtLevel(root.Left, level-1);
+				printNodeAtLevel(root.Right, level-1);
+			}
+				
+		}
+		
+		//Time Complexity = o(n2) and space complexity=width of tree
 		void LevelOrderTraversal()
 		{
 			if(this.root==null)
@@ -93,13 +131,47 @@ public class TreeDs {
 			//Take Item from preorder
 			TreeNode tNode = new TreeNode(preorder.get(preIndex++));
 			//No children left for this node
-			if(inStrt==inStrt)
+			if(inStrt==inEnd)
 				return tNode;
 			int inIndex= inorder.indexOf(tNode.key);
 			
 			tNode.Left=ConstructTreeFromInOrderAndPreOrder(inorder, preorder, inStrt, inIndex-1);
 			tNode.Right=ConstructTreeFromInOrderAndPreOrder(inorder, preorder, inIndex+1, inEnd);
 			return tNode;
+		}
+		
+		HashMap<Integer, ArrayList<Integer>> hashMap =  new HashMap<>();
+		void getVerticalOrederUsingHash(TreeNode root, int hashDistance)
+		{
+			if(root==null)
+				return;
+
+			try
+			{
+				hashMap.get(hashDistance).add(root.key);
+				hashMap.put(hashDistance, hashMap.get(hashDistance));
+			}
+			catch(NullPointerException ex){
+				ArrayList<Integer> node = new ArrayList<>();
+				node.add(root.key);
+				hashMap.put(hashDistance, node);
+;				
+			}
+			
+			getVerticalOrederUsingHash(root.Left, hashDistance-1);
+			getVerticalOrederUsingHash(root.Right, hashDistance+1);	
+		}
+		
+		void printVerticalOrder()
+		{
+			for (Map.Entry<Integer, ArrayList<Integer>> element : hashMap.entrySet()) {
+				System.out.println(element.getKey());
+				Iterator entries = element.getValue().iterator();
+				while(entries.hasNext())
+				{
+					System.out.println(entries.toString());
+				}
+			}
 		}
 	}
 	

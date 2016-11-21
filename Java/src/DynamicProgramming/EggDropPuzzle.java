@@ -1,4 +1,5 @@
 package DynamicProgramming;
+import java.lang.*;
 
 public class EggDropPuzzle {
 
@@ -23,7 +24,7 @@ public class EggDropPuzzle {
 		int min = Integer.MAX_VALUE;
 		for(int i=1;i<=floor;i++)
 		{
-			int result = Integer.max(EggDrop(eggs-1, floor-1) , EggDrop(eggs, floor-i) );
+			int result = Math.max(EggDrop(eggs-1, floor-1) , EggDrop(eggs, floor-i) );
 			if(result<min)
 				min=result;
 		}
@@ -52,7 +53,7 @@ public class EggDropPuzzle {
 	            eggFloor[i][j] = Integer.MAX_VALUE;
 	            for (int x = 1; x <= j; x++)
 	            {
-	               int  res = 1 + Integer.max(eggFloor[i-1][x-1], eggFloor[i][j-x]);
+	               int  res = 1 + Math.max(eggFloor[i-1][x-1], eggFloor[i][j-x]);
 	                if (res < eggFloor[i][j])
 	                    eggFloor[i][j] = res;
 	            }

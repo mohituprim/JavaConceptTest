@@ -23,7 +23,6 @@ public class LinkedList {
 		Node node = new Node(new_data);
 		node.next =head;
 		head =node;
-		
 	}
 	
 	public void inserAtEnd(int new_data)
@@ -157,6 +156,7 @@ public class LinkedList {
  
         // Let us understand the below code for example k = 4
         // and list = 10->20->30->40->50->60.
+        // output = 50->60->10->20->30->40
         Node current  = head;
  
         // current will either point to kth or NULL after this

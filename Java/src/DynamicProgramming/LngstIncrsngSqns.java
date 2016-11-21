@@ -58,5 +58,33 @@ public class LngstIncrsngSqns {
 		}
 		return maxlis;
 	}
+	
+	int maxlisOverall=1;
+	public int recursiveBruteForce(int n)
+	{
+		if(n==1)
+			return 1;
+		int res;
+		int maxEndingHere=1;
+		/* Recursively get all LIS ending with arr[0], arr[1] ... 
+	       arr[n-2]. If   arr[i-1] is smaller than arr[n-1], and 
+	       max ending with arr[n-1] needs to be updated, then 
+	       update it */
+		
+		for(int i=1;i<n;i++)
+		{
+			res = recursiveBruteForce(i);
+			if(array[i-1]<array[n-1]&&res+1>maxEndingHere)
+			{
+				maxEndingHere=res+1;
+			}
+		}
+		
+		if(maxlisOverall<maxEndingHere)
+			maxlisOverall=maxEndingHere;
+		
+		// Return length of LIS ending with arr[n-1]
+		return maxEndingHere;
+	}
 }
 

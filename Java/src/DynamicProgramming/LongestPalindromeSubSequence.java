@@ -9,15 +9,19 @@ public class LongestPalindromeSubSequence {
 
 	public int LongestPalindromeSubSequenceRecursive(String input, int i, int j)
 	{
+		 // Base Case 1: If there is only 1 character
 		if(i==j)
 			return 1;
+		 // Base Case 2: If there are only 2 characters and both are same
 		if((i+1==j)&&(input.charAt(i)==input.charAt(j)))
 			return 2;
+		 // If the first and last characters match
 		if(input.charAt(i)==input.charAt(j))
 		{
 			return LongestPalindromeSubSequenceRecursive(input, i+1, j+1)+2;
 		}		
 		
+		// If the first and last characters do not match
 		return Integer.max(LongestPalindromeSubSequenceRecursive(input, i, j-1), LongestPalindromeSubSequenceRecursive(input, i+1, j));
 	}
 	

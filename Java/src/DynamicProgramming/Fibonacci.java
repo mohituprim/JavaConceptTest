@@ -10,7 +10,7 @@ public class Fibonacci {
 	static void printFibonacciRecursively()
 	{
 		Fibonacci f = new Fibonacci();
-		f.FibonacciUsingDp(5);
+		f.FibonacciUsingDpBootomUp(5);
 
 	}
 	
@@ -22,7 +22,7 @@ public class Fibonacci {
 		return FibonacciRecursively(number-1) + FibonacciRecursively(number-2);
 	}
 	
-	void FibonacciUsingDp(int number)
+	void FibonacciUsingDpBootomUp(int number)
 	{		
 		int[] array = new int[number+1];
 		array[0]=1;
@@ -38,6 +38,31 @@ public class Fibonacci {
 			System.out.println(array[i]);
 		}
 		
+	}
+	
+	private static final int NIL=-1;
+	private static final int MAX=100;
+	Integer lookUp[] = new Integer[MAX];
+	
+	void _initialize()
+	{
+	  int i;
+	  for (i = 0; i < MAX; i++)
+		  lookUp[i] = NIL;
+	}
+	
+	int FibonacciUsingDpTopDown(int N)
+	{
+		
+		if(lookUp[N]==NIL)
+		{
+			if(N<=1)
+				lookUp[N]=N;
+			else
+				lookUp[N]=lookUp[N-1]+lookUp[N-1];
+		}
+		
+		return lookUp[N];
 	}
 
 }

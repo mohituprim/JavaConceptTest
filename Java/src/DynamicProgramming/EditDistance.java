@@ -1,5 +1,5 @@
 package DynamicProgramming;
-
+import java.util.*;
 public class EditDistance {
 
 	public static void main(String[] args) {
@@ -33,6 +33,7 @@ public class EditDistance {
 	{
 		Integer dpArray[][] = new Integer[m+1][n+1];
 		
+		
 		for(int i=0; i<=m; i++)
 		{
 			for(int j=0; j<=n; j++)
@@ -48,6 +49,9 @@ public class EditDistance {
 				
 			}
 		}
+		
+		int a[]={1,2,3};
+		
 		return dpArray[m][n];
 	}
 }

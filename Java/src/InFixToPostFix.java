@@ -96,11 +96,70 @@ public class InFixToPostFix {
 		return result.pop();
 		
 	}
+	
+	public static int performOperation(int operand1, int operand2, Character operator)
+	{
+		if(operator=='+')
+			return operand1+operand2;
+		else if(operator=='-')
+			return operand1-operand2;
+		else if(operator=='*')
+			return operand1*operand2;
+		else if(operator=='/')
+			return operand1/operand2;
+		else return 0;
+	}
+	public static int EvaluatePreFixTypeExpression(String prefix /*(+546)*/)
+	{
+		Stack<Integer> result = new Stack<Integer>();
+		if(prefix.length()<startIndex)
+			return -1;
+		char c = prefix.charAt(startIndex);
+		
+		if(c=='(')
+		{
+			startIndex=startIndex+1;
+			char operator = prefix.charAt(startIndex);
+			startIndex=startIndex+1;
+			c = prefix.charAt(startIndex);
+			while(c!=')')
+			{
+				if(c=='(')
+				{
+					int temp = EvaluatePreFixTypeExpression(prefix);
+					if(temp!=-1)
+						result.push(temp);
+					else
+						return result.pop();
+				}
+				else 
+					result.push(Character.getNumericValue(c));
+				startIndex=startIndex+1;
+				c = prefix.charAt(startIndex);
+			}
+
+			while(result.size()>1)
+			{
+				int op1 =  result.pop();
+				int op2 =  result.pop();
+				result.push(performOperation(op2, op1, operator));
+			}
+		}
+		else 
+		{
+			System.out.println("Invalid Expression");
+			return -1;
+		}
+		return result.pop();
+	}
+	static int startIndex = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String postfix = printInfixToPostfix("1+2*3+4");
+		//String postfix = printInfixToPostfix("1+2*3+4");
 		
-		int result =  EvaluatePostFix(postfix);
+		//int result =  EvaluatePostFix(postfix);
+		int result = EvaluatePreFixTypeExpression("(*2(-73)4)");
+		System.out.println("Output = " + result);
 	}
 
 }
